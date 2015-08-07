@@ -2,6 +2,11 @@ var express = require('express');
 var partials = require('express-partials');
 var util = require('./lib/utility');
 
+var mongoose    = require('mongoose');
+mongoose.connect('mongodb://localhost/shortly'); // connect to mongo database named shortly
+var userController = require('./app/mongo/userController.js');
+var linksController = require('./app/mongo/linkController.js');
+
 var handler = require('./lib/request-handler');
 
 var app = express();
@@ -16,6 +21,7 @@ app.configure(function() {
   app.use(express.session());
 });
 
+/*
 app.get('/', util.checkUser, handler.renderIndex);
 app.get('/create', util.checkUser, handler.renderIndex);
 
@@ -30,5 +36,20 @@ app.get('/signup', handler.signupUserForm);
 app.post('/signup', handler.signupUser);
 
 app.get('/*', handler.navToLink);
+*/
+
+app.get('/', handler.renderIndex);
+
+app.get('/links', linksController.allLinks);
+app.post('/links', linksController.newLink);
+
+app.get('/signup', handler.signupUserForm);
+app.post('/signup', userController.signup);
+
+app.get('/login', handler.loginUserForm);
+app.post('/login', userController.signup);
+app.get('/logout', handler.logoutUser);
+
+app.get('/*', linksController.navToLink);
 
 module.exports = app;

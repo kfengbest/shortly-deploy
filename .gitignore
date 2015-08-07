@@ -8,7 +8,8 @@ iisnode.yml
 Icon
 
 
-
+node_modules/*
+db/shortly.sqlite
 
 # Floobits
 .floo
