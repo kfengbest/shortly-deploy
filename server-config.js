@@ -3,7 +3,7 @@ var partials = require('express-partials');
 var util = require('./lib/utility');
 
 var mongoose    = require('mongoose');
-mongoose.connect('mongodb://localhost/shortly'); // connect to mongo database named shortly
+mongoose.connect('mongodb://shortly:shortly@ds031873.mongolab.com:31873/shortly'); // connect to mongo database named shortly
 var userController = require('./app/mongo/userController.js');
 var linksController = require('./app/mongo/linkController.js');
 
